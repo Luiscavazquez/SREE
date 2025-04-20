@@ -1,0 +1,29 @@
+{
+  "name": "sree-1",
+  "version": "1.0.0",
+  "description": "Proyecto Karla APIS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Luiscavazquez/SREE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Luiscavazquez/SREE/issues"
+  },
+  "homepage": "https://github.com/Luiscavazquez/SREE#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.2",
+    "pg": "^8.14.1"
+  }
+}
