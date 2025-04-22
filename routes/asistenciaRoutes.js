@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const AsistenciaController = require('../Controllers/AsistenciaController');
@@ -7,8 +6,12 @@ const AsistenciaController = require('../Controllers/AsistenciaController');
 router.get('/ping', (req, res) => {
     res.json({ message: 'pong' });
 });
-//RUTAS DE APIS NO BORRAR O EDITAR.
+
+// RUTAS DE APIS NO BORRAR O EDITAR.
 router.post('/asistencia', AsistenciaController.registrarAsistencia);
 router.get('/:numeroControl', AsistenciaController.verAsistenciasPorNumeroControl);
+
+// NUEVA RUTA: Descargar PDF de asistencias de un maestro
+router.get('/pdf/maestro/:idMaestro', AsistenciaController.enviarAsistenciasPDF);
 
 module.exports = router;

@@ -134,3 +134,49 @@ exports.verAsistenciasPorNumeroControl = async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
+
+const PDFDocument = require('pdfkit');
+
+// Generar PDF de asistencias por ID de maestro
+exports.enviarAsistenciasPDF = async (req, res) => {
+  const { idMaestro } = req.params;
+
+  try {
+    const query = `
+      SELECT a.fecha, a.estado, a.nombre, a.apellidop, a.apellidom, a.materia, a.aula
+      FROM asistencias a
+      JOIN clase c ON a.idclase = c.idclase
+      WHERE c.idmaestro = $1
+      ORDER BY a.fecha DESC
+    `;
+
+    const result = await pool.query(query, [idMaestro]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ mensaje: 'No hay asistencias registradas para este maestro.' });
+    }
+
+    // Crear PDF
+    const doc = new PDFDocument();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=asistencias_maestro.pdf');
+
+    doc.pipe(res);
+
+    doc.fontSize(18).text('Reporte de Asistencias del Maestro', { align: 'center' });
+    doc.moveDown();
+
+    result.rows.forEach((row, index) => {
+      doc
+        .fontSize(12)
+        .text(`${index + 1}. ${row.nombre} ${row.apellidop} ${row.apellidom} | Materia: ${row.materia} | Aula: ${row.aula} | Fecha: ${row.fecha.toISOString().split('T')[0]} | Estado: ${row.estado}`);
+    });
+
+    doc.end();
+
+  } catch (error) {
+    console.error('Error al generar PDF:', error);
+    res.status(500).json({ mensaje: 'Error interno al generar PDF', error: error.message });
+  }
+};

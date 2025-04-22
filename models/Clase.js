@@ -17,7 +17,13 @@ const ClaseSchema = new mongoose.Schema({
   Materia: {
     type: String,
     required: true
-  }
+  },
+  Alumnos: [
+    {
+      IdAlumno: { type: Number, required: true },
+      Nombre: { type: String, required: true }
+    }
+  ]
 });
 
 module.exports = mongoose.model('Clase', ClaseSchema);

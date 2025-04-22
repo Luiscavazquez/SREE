@@ -5,4 +5,7 @@ const MateriaController = require('../Controllers/MateriaController');
 // Ruta para dar de alta una materia
 router.post('/', MateriaController.crearMateria);
 
+// Ruta para obtener todas las materias
+router.get('/', MateriaController.obtenerMaterias);
+
 module.exports = router;

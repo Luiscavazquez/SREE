@@ -23,3 +23,9 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+const claseRoutes = require('./routes/claseRoutes');
+app.use('/api/clases', claseRoutes);
+
+const asistenciaRoutes = require('./routes/asistenciaRoutes');
+app.use('/api/asistencias', asistenciaRoutes);

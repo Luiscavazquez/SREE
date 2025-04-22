@@ -46,3 +46,15 @@ exports.crearMateria = async (req, res) => {
     res.status(500).json({ error: 'Error interno al registrar materia' });
   }
 };
+
+exports.obtenerMaterias = async (req, res) => {
+  try {
+    // Obtener todas las materias desde MongoDB
+    const materias = await Materia.find();
+
+    res.status(200).json(materias);
+  } catch (error) {
+    console.error('Error al obtener materias:', error);
+    res.status(500).json({ error: 'Error interno al obtener materias' });
+  }
+};
