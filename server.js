@@ -11,21 +11,18 @@ app.use(express.json());
 // Conectar a MongoDB
 conectarMongoDB();
 
-// Importar y usar rutas 
+// Importar y usar rutas correctamente
 const asistenciaRoutes = require('./routes/asistenciaRoutes');
-app.use('/', asistenciaRoutes); 
+app.use('/api/asistencias', asistenciaRoutes);
 
 const materiaRoutes = require('./routes/materiaRoutes');
 app.use('/api/materias', materiaRoutes);
+
+const claseRoutes = require('./routes/claseRoutes');
+app.use('/api/clases', claseRoutes);
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 });
-
-const claseRoutes = require('./routes/claseRoutes');
-app.use('/api/clases', claseRoutes);
-
-const asistenciaRoutes = require('./routes/asistenciaRoutes');
-app.use('/api/asistencias', asistenciaRoutes);
