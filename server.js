@@ -12,8 +12,11 @@ app.use(express.json());
 conectarMongoDB();
 
 // Importar y usar rutas correctamente
+//const asistenciaRoutes = require('./routes/asistenciaRoutes');
+//app.use('/api/asistencias', asistenciaRoutes);
+
 const asistenciaRoutes = require('./routes/asistenciaRoutes');
-app.use('/api/asistencias', asistenciaRoutes);
+app.use('/asistencia', asistenciaRoutes);
 
 const materiaRoutes = require('./routes/materiaRoutes');
 app.use('/api/materias', materiaRoutes);
