@@ -141,6 +141,13 @@ const PDFDocument = require('pdfkit');
 exports.enviarAsistenciasPDF = async (req, res) => {
   const { idMaestro } = req.params;
 
+  exports.enviarAsistenciasPDF = async (req, res) => {
+    console.log("✅ Ruta /pdf/maestro/:idMaestro fue llamada");
+  
+    const { idMaestro } = req.params;
+    // ...
+  };  
+
   try {
     const query = `
       SELECT a.fecha, a.estado, a.nombre, a.apellidop, a.apellidom, a.materia, a.aula
