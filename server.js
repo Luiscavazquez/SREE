@@ -21,8 +21,12 @@ app.use('/api/materias', materiaRoutes);
 const claseRoutes = require('./routes/claseRoutes');
 app.use('/api/clases', claseRoutes);
 
+//const alumnoRoutes = require('./routes/alumnoRoutes');
+//app.use('/api/alumnos', alumnoRoutes); // Mover esto arriba
+
 const alumnoRoutes = require('./routes/alumnoRoutes');
-app.use('/api/alumnos', alumnoRoutes); // Mover esto arriba
+app.use('/api/alumnos', alumnoRoutes);
+
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
