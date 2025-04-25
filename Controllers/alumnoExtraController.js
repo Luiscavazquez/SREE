@@ -1,4 +1,4 @@
-const pool = require('../config/db');
+const { pool } = require('../config/db');
 const Alumno = require('../models/alumno.model');
 
 const registrarAlumno = async (req, res) => {

@@ -1,6 +1,7 @@
-const pool = require('../config/db');
+const { pool } = require('../config/db');
 const Usuario = require('../models/usuario.model');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+
 
 const registrarUsuario = async (req, res) => {
     const {correo, contrasenia, tipoUsuario} = req.body;

@@ -8,7 +8,7 @@ router.get('/ping', (req, res) => {
 });
 
 // RUTAS DE APIS NO BORRAR O EDITAR.
-router.post('/asistencia', AsistenciaController.registrarAsistencia);
+router.post('/', AsistenciaController.registrarAsistencia);
 router.get('/:numeroControl', AsistenciaController.verAsistenciasPorNumeroControl);
 
 // NUEVA RUTA: Descargar PDF de asistencias de un maestro

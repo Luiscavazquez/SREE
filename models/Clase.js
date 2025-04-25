@@ -14,8 +14,8 @@ const ClaseSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  Materia: {
-    type: String,
+  IdMaestro: {
+    type: Number,
     required: true
   },
   Alumnos: [

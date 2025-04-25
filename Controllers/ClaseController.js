@@ -1,23 +1,35 @@
 const Clase = require('../models/Clase');
+const { pool } = require('../config/db'); // conexión PostgreSQL
 
 // Crear una nueva clase
 const crearClase = async (req, res) => {
   try {
-    const { IdClase, Aula, IdMateria, Materia } = req.body;
+    const { Aula, IdMateria, IdMaestro } = req.body;
 
-    if (!IdClase || !Aula || !IdMateria || !Materia) {
+    if (!Aula || !IdMateria || !IdMaestro) {
       return res.status(400).json({ mensaje: 'Faltan datos obligatorios.' });
     }
 
-    const claseExistente = await Clase.findOne({ IdClase });
-    if (claseExistente) {
-      return res.status(409).json({ mensaje: 'El IdClase ya está registrado.' });
-    }
+    // Guardar en PostgreSQL (IdClase se autogenera)
+    const resultado = await pool.query(
+      'INSERT INTO Clase (Aula, IdMateria, IdMaestro) VALUES ($1, $2, $3) RETURNING IdClase',
+      [Aula, IdMateria, IdMaestro]
+    );
 
-    const nuevaClase = new Clase({ IdClase, Aula, IdMateria, Materia });
+    const nuevoIdClase = resultado.rows[0].idclase;
+
+    // Guardar en MongoDB con el mismo IdClase
+    const nuevaClase = new Clase({
+      IdClase: nuevoIdClase,
+      Aula,
+      IdMateria,
+      IdMaestro
+    });
+
     await nuevaClase.save();
 
     res.status(201).json({ mensaje: 'Clase registrada exitosamente', clase: nuevaClase });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: 'Error al registrar la clase.' });
